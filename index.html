@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Ultimate Tic Tac Toe</title>
+    <meta content="text/html;charset=utf-8" http-equiv="content-type">
+    <meta name="keywords" content="tic tac toe, ultimate tic tac toe, js, javascript, game, html5, puzzle game">
+    <meta name="description" content="An HTML5 implementation of Ulimate Tic Tac Toe made by AJ Weeks">
+    <meta name="author" content="AJ Weeks">
+    <script type="text/javascript" src="main.js"></script>
+    <style type="text/css">
+        @font-face {
+            font-family: SourceSansPro-Bold;
+            src: url('res/SourceSansPro-Bold.otf') format('opentype');
+        }
+        @font-face {
+            font-family: SourceSansPro-Light;
+            src: url('res/SourceSansPro-Light.otf') format('opentype');
+        }
+        @font-face {
+            font-family: SourceSansPro-ExtraLight;
+            src: url('res/SourceSansPro-ExtraLight.otf') format('opentype');
+        }
+        @font-face {
+            font-family: SourceSansPro-Regular;
+            src: url('res/SourceSansPro-Regular.otf') format('opentype');
+        }
+    </style>
+    <style type="text/css">
+        html {
+            background-color: #201020;
+            color: #F8F8F8;
+            font-family: SourceSansPro-Regular;
+            font-size: 30px;
+
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        #gameArea {
+            width: 100%;
+            margin-top: 65px;
+        }
+
+        #gameCanvas {
+            display: block;
+            margin: 0 auto;
+            border-radius: 8px;
+        }
+
+        #buttons {
+            position: absolute;
+            padding: 6px 4px;
+            top: 20%;
+            left: 10%;
+        }
+
+        .button {
+            position: absolute;
+            background-color: #101;
+            margin-bottom: 10px;
+            box-shadow: 3px 3px 0 #313;
+            padding: 4px 10px;
+            cursor: pointer;
+            color: #EFE;
+        }
+
+        .button:hover {
+            margin-top: 1px;
+            margin-left: 1px;
+            margin-bottom: 9px;
+            box-shadow: 2px 2px #313;
+        }
+
+        /* FIXME: buttons after first don't render correctly while being hovered on */
+        .button:active {
+            margin-left: 3px;
+            margin-top: 3px;
+            margin-bottom: 7px;
+            box-shadow: none;
+        }
+
+        .onoffswitch {
+            position: relative; width: 89px;
+            -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+        }
+        .onoffswitch-checkbox {
+            display: none;
+        }
+        .onoffswitch-label {
+            display: block; overflow: hidden; cursor: pointer;
+            border: 2px solid #202; border-radius: 5px;
+        }
+        .onoffswitch-inner {
+            display: block; width: 200%; margin-left: -100%;
+            -moz-transition: margin 0.3s ease-in 0s; -webkit-transition: margin 0.3s ease-in 0s;
+            -o-transition: margin 0.3s ease-in 0s; transition: margin 0.3s ease-in 0s;
+        }
+        .onoffswitch-inner:before, .onoffswitch-inner:after {
+            display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
+            font-size: 15px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+            -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+        }
+        .onoffswitch-inner:before {
+            content: "AI";
+            padding-left: 10px;
+            background-color: #313; color: #FFFFFF;
+        }
+        .onoffswitch-inner:after {
+            content: "Player";
+            padding-right: 10px;
+            background-color: #F8F8F8; color: #444;
+            text-align: right;
+        }
+        .onoffswitch-switch {
+            display: block; width: 26px; margin: 0px;
+            background: #FFFFFF;
+            border: 2px solid #202; border-radius: 5px;
+            position: absolute; top: 0; bottom: 0; right: 59px;
+            -moz-transition: all 0.3s ease-in 0s; -webkit-transition: all 0.3s ease-in 0s;
+            -o-transition: all 0.3s ease-in 0s; transition: all 0.3s ease-in 0s;
+        }
+        .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+            margin-left: 0;
+        }
+        .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+            right: 0px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Ultimate Tic Tac Toe</h2>
+    <div id="gameArea">
+        <canvas id="gameCanvas" width="544" height="544" onmousedown="boardClick(event)" onmousemove="boardHover(event)" oncontextmenu="return false"></canvas>
+    </div>
+    <div id="buttons">
+        <div class="button" onmousedown="newGame()" style="width: 136px">New Game</div>
+
+        <h4 style="margin-bottom: 5px; margin-left: 56px; margin-top: 65px">VS:</h4>
+        <div class="onoffswitch" style="margin-left: 30px">
+            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+            <label class="onoffswitch-label" for="myonoffswitch">
+                <span class="onoffswitch-inner"></span>
+                <span class="onoffswitch-switch"></span>
+            </label>
+        </div>
+    </div>
+</body>
+</html>
