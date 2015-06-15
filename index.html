@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+<!-- Copyright AJ Weeks 2015 Liqwidice Games -->
 <html lang="en">
 <head>
     <title>Ultimate Tic Tac Toe</title>
     <meta content="text/html;charset=utf-8" http-equiv="content-type">
-    <meta name="keywords" content="tic tac toe, ultimate tic tac toe, js, javascript, game, html5, puzzle game">
+    <meta name="keywords" content="tic tac toe, ultimate tic tac toe, js, javascript, game, html5, web game, puzzle game, liqwidice, liqwidice games">
     <meta name="description" content="An HTML5 implementation of Ulimate Tic Tac Toe made by AJ Weeks">
     <meta name="author" content="AJ Weeks">
     <script type="text/javascript" src="main.js"></script>
@@ -31,6 +32,7 @@
             color: #F8F8F8;
             font-family: SourceSansPro-Regular;
             font-size: 30px;
+            min-width: 970px;
 
             -webkit-touch-callout: none;
             -webkit-user-select: none;
@@ -46,44 +48,38 @@
         #gameArea {
             width: 100%;
             margin-top: 65px;
+            display: flex;
+            justify-content: center;
         }
 
         #gameCanvas {
-            display: block;
-            margin: 0 auto;
             border-radius: 8px;
+            margin-right: 200px;
         }
 
         #buttons {
-            position: absolute;
-            padding: 6px 4px;
-            top: 20%;
-            left: 10%;
+            padding: 10px 20px;
         }
 
         .button {
-            position: absolute;
             background-color: #101;
+            box-shadow: 0 0 5px rgba(150, 150, 150, 0.5);
+            transition: box-shadow 0.2s ease-out, color 0.2s;
             margin-bottom: 10px;
-            box-shadow: 3px 3px 0 #313;
+            margin-right: 10px;
             padding: 4px 10px;
             cursor: pointer;
             color: #EFE;
         }
 
         .button:hover {
-            margin-top: 1px;
-            margin-left: 1px;
-            margin-bottom: 9px;
-            box-shadow: 2px 2px #313;
+            box-shadow: 0 0 5px rgba(150, 150, 150, 0.5), 0 0 5px rgba(150, 150 , 150, 1.0) inset;
+            color: #CDC;
         }
 
         /* FIXME: buttons after first don't render correctly while being hovered on */
         .button:active {
-            margin-left: 3px;
-            margin-top: 3px;
-            margin-bottom: 7px;
-            box-shadow: none;
+            box-shadow: #313 inset;
         }
 
         .onoffswitch {
@@ -132,24 +128,75 @@
         .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
             right: 0px;
         }
+
+        #darken {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            transition: all 3s;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 5;
+        }
+
+        #popup {
+            text-align: center;
+            position: absolute;
+            background-color: #111;
+            padding: 10px;
+            border-color: #CD3;
+            border-width: 4px;
+            border-style: ridge;
+            top: 20%;
+            left: 50%;
+            margin-left: -150px;
+            z-index: 6;
+        }
+        #popup h2 {
+            margin: 10px;
+        }
+        #popup a {
+            font-size: 18px;
+            position: absolute;
+            right: 6px;
+            top: 0;
+            color: white;
+            cursor: pointer;
+        }
+        #popup a:hover {
+            text-shadow: 0 0 5px white;
+        }
+        #popup div {
+            display: inline-block;
+        }
+
+        footer {
+            position: fixed;
+            background-color: #282028;
+            font-size: 16px;
+            bottom: 0;
+            left: 0;
+            padding: 3px 10px;
+            width: 100%;
+        }
+        footer a {
+            color: white;
+        }
     </style>
 </head>
 <body>
     <h2>Ultimate Tic Tac Toe</h2>
     <div id="gameArea">
+        <div id="buttons">
+            <div class="button" onmousedown="createPopup('newgame')" style="width: 136px">New Game</div>
+            <div class="button" onmousedown="createPopup('rules')" style="width: 136px">Rules</div>
+        </div>
         <canvas id="gameCanvas" width="544" height="544" onmousedown="boardClick(event)" onmousemove="boardHover(event)" oncontextmenu="return false"></canvas>
     </div>
-    <div id="buttons">
-        <div class="button" onmousedown="newGame()" style="width: 136px">New Game</div>
 
-        <h4 style="margin-bottom: 5px; margin-left: 56px; margin-top: 65px">VS:</h4>
-        <div class="onoffswitch" style="margin-left: 30px">
-            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
-            <label class="onoffswitch-label" for="myonoffswitch">
-                <span class="onoffswitch-inner"></span>
-                <span class="onoffswitch-switch"></span>
-            </label>
-        </div>
-    </div>
+    <div id="darken" style="display: none"></div>
+    <div id="popup" style="display: none"></div>
+    <footer><span>More games at <a href="http://ajweeks.github.io">ajweeks.github.io</a></span></footer>
 </body>
 </html>
